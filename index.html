@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiltjs 一个jQuery微小的60 fps视差倾斜悬停效果</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding-top: 50px;
+        }
+        .wrapper{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .wrapper li{
+            width: 12%;
+        }
+        .box{
+            width: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            background-color: #9e21ff;
+        }
+        .box1{
+            background-image: linear-gradient(135deg, #ff008a 0%, #101c25 100%);
+            -webkit-background-image: linear-gradient(135deg, #ff008a 0%, #101c25 100%);
+            -moz-background-image: linear-gradient(135deg, #ff008a 0%, #101c25 100%);
+        }
+        .box2{
+            background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
+            -webkit-background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
+            -moz-background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
+        }
+        .box3{
+            background-image: linear-gradient(135deg, #b118ac 0%, #26c7da 100%);
+            -webkit-background-image: linear-gradient(135deg, #b118ac 0%, #26c7da 100%);
+            -moz-background-image: linear-gradient(135deg, #b118ac 0%, #26c7da 100%);
+        }
+        .box4{
+            background-image: linear-gradient(135deg, #ed21ff 0%, #9e21ff 100%);
+            -webkit-background-image: linear-gradient(135deg, #ed21ff 0%, #9e21ff 100%);
+            -moz-background-image: linear-gradient(135deg, #ed21ff 0%, #9e21ff 100%);
+        }
+        .box5{
+            background-image: linear-gradient(135deg, #40e0d0 0%, #ff0080 100%);
+            -webkit-background-image: linear-gradient(135deg, #40e0d0 0%, #ff0080 100%);
+            -moz-background-image: linear-gradient(135deg, #40e0d0 0%, #ff0080 100%);
+        }
+        .box6{
+            background-image: linear-gradient(135deg, #ff4b1f 0%, #1fddff 100%);
+            -webkit-background-image: linear-gradient(135deg, #ff4b1f 0%, #1fddff 100%);
+            -moz-background-image: linear-gradient(135deg, #ff4b1f 0%, #1fddff 100%);
+        }
+        .box7{
+            background-image: linear-gradient(135deg, #16a085 0%, #f4d03f 100%);
+            -webkit-background-image: linear-gradient(135deg, #16a085 0%, #f4d03f 100%);
+            -moz-background-image: linear-gradient(135deg, #16a085 0%, #f4d03f 100%);
+        }
+        .case{
+            width: 40%;
+            height: 40%;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%) translateZ(20px);
+            box-shadow: 0 0 50px 0 rgb(51 51 51 / 30%);
+        }
+        .txt{
+            width: 100%;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+        }
+        .more{
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <ul class="wrapper">
+        <li>
+            <div class="box box1" data-tilt data-tilt-perspective="300" data-tilt-speed="400" data-tilt-max="25"></div>
+            <div class="txt">最基本的用法</div>
+        </li>
+        <li>
+            <div class="box box2" data-tilt data-tilt-perspective="300" data-tilt-speed="400" data-tilt-max="25">
+                <div class="case"></div>
+            </div>
+            <div class="txt">创建视差效果</div>
+        </li>
+        <li>
+            <div class="box box3" data-tilt data-tilt-glare="true" data-tilt-maxglare=".5" data-tilt-perspective="300" data-tilt-speed="400" data-tilt-max="25"></div>
+            <div class="txt">眩光效果</div>
+        </li>
+        <li>
+            <div class="box box4" data-tilt data-tilt-reset="false" data-tilt-speed="400" data-tilt-max="25" data-tilt-perspective="300"></div>
+            <div class="txt">保持浮动</div>
+        </li>
+        <li>
+            <div class="box box5" data-tilt data-tilt-speed="1000" data-tilt-max="20" data-tilt-scale="1.2" data-tilt-perspective="250"></div>
+            <div class="txt">悬停时缩放</div>
+        </li>
+        <li>
+            <div class="box box6" data-tilt data-tilt-speed="250" data-tilt-max="50" data-tilt-axis="x" data-tilt-perspective="250"></div>
+            <div class="txt">禁用Y轴</div>
+        </li>
+        <li>
+            <div class="box box7" data-tilt data-tilt-speed="250" data-tilt-max="50" data-tilt-axis="y" data-tilt-perspective="250"></div>
+            <div class="txt">禁用X轴</div>
+        </li>
+    </ul>
+    <div class="more">
+        更多：<a href="http://gijsroge.github.io/tilt.js/?ref=jQueryCards.com">http://gijsroge.github.io/tilt.js/?ref=jQueryCards.com</a>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script>
+        window.onload = window.onresize = function(){
+            $('.box').css('height',$('.box').width())
+        }
+    </script>
+    <script src="tilt.jquery.min.js"></script>
+    <!-- <script src="tilt.jquery.js"></script> -->
+</body>
+</html>
